@@ -1,38 +1,260 @@
-.App {
-  text-align: center;
+* {
+  box-sizing: border-box;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  color: white;
+  background-color: black;
+  /* font-family: Arial, Helvetica, sans-serif; */
+  font-family: 'Helvetica Neue';
+  font-weight: bold;
+  font-style: normal;
+  --spacing: 0.25em;
+  --radius: 0.25em;
+  --ui-item-height: 2.5em;
+  --ui-item-margin: 2px;
+  --selection-color: #46489B;
+  --cutting-board-color: #2D3B2C;
+  --gray: #444;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+h1 {
+  margin:0;
+  font-size: 200%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+#main {
+  position:absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   display: flex;
+  gap: var(--spacing);
+  height: 100%;
   flex-direction: column;
+  padding: var(--spacing);
+}
+
+#top {
+  display: flex;
+  gap: var(--spacing);
+  flex-direction: row;
+  align-items: center;
+}
+
+#title {
+  flex-grow: 1;
+}
+
+#cog {
+  width: 2em;
+  height: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#cog img {
+  width: 1.5em;
+  height: 1.5em;
+  opacity: 0.65;
+
+}
+
+#rec-wave-chop {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing);
+}
+
+#rec-wave-zoom {
+  display: flex;
+  gap: var(--spacing);
+  flex-direction: column;
+  width: 4.3em;
+}
+#rec {
+  background-color: var(--gray);
+  border-radius: var(--radius);
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  height: 3em;
+  position: relative;
+  /*
+  this fixes a webkit bug with the overflow not being rounded cornered according to
+  https://stackoverflow.com/questions/5736503/how-to-make-css3-rounded-corners-hide-overflow-in-chrome-opera
+  */
+  -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC); /* this fixes the overflow:hidden in Chrome/Opera */
+
+}
+#rec .progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 50%;
+  background-color:red;
+  overflow: hidden;
+  z-index: 0;
+}
+#rec h1 {
+  z-index: 1;
 }
 
-.App-link {
-  color: #61dafb;
+#wave {
+  position: relative;
+  flex-grow: 1;
+  border-radius: var(--radius);
+  background-color: var(--selection-color);
+}
+#zoom {
+  text-align:center;
+  border-radius: var(--radius);
+  background-color: var(--gray);
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 80%;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  position: relative;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+#chop {
+  background-color: var(--cutting-board-color);
+  border-radius: var(--radius);
+  flex-grow: 1;
+  position: relative;
+  overflow: hidden;
+}
+#toolMenu {
+  display:flex;
+  gap: var(--spacing);
+  margin: 0;
+  padding:0;
+  width: 100%;
+}
+#toolMenu li {
+	cursor: pointer;
+  flex-grow: 1;
+  
+  text-align: center;
+  list-style: none;
+  border-radius: var(--radius);
+  padding-top: 0.7em;
+  padding-bottom: 0.7em;
+  font-size: 125%;
+}
+#toolMenu .active {
+  background-color: #600;
+}
+
+.checkbox {
+  display:inline-block;
+  width: 12em;
+  height: var(--ui-item-height);
+  background-color: var(--gray);
+  position: relative;
+  margin-right: var(--ui-item-margin);
+}
+
+.checkbox label, .segmented label, .slider label {
+  font-size: 90%;
+  bottom:0;
+  position:absolute;
+}
+.slider {
+	position: relative;
+	width: 80%;
+	height: var(--ui-item-height);
+	background: repeating-linear-gradient(
+  90deg,
+  black,
+  black 1px,
+  #333 1px,
+  #333 2px
+);
+}
+.segmented {
+  list-style: none;
+  padding: 0;
+}
+.segmented li {
+  position:relative;	
+  background-color: var(--gray);
+  display: inline-block;			
+  width: 4em;
+  height: var(--ui-item-height);
+  margin-right: var(--ui-item-margin);
+}
+
+.selected {
+  background: rgb(232,0,0);
+  background: linear-gradient(180deg, rgba(232,0,0,1) 0%, rgba(145,0,0,1) 100%);
+}
+.inner-shadow {
+  box-shadow: 0 0 20px 0 rgba(0,0,0,0.5) inset;
+}
+.overshadow {
+  box-shadow: 0 0 20px 0 rgba(0,0,0,0.5) inset;
+  position:absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  height:100%;
+}
+
+@-webkit-keyframes rotating /* Safari and Chrome */ {
+	from {
+	  -webkit-transform: rotate(0deg);
+	  -o-transform: rotate(0deg);
+	  transform: rotate(0deg);
+	}
+	to {
+	  -webkit-transform: rotate(360deg);
+	  -o-transform: rotate(360deg);
+	  transform: rotate(360deg);
+	}
   }
-  to {
-    transform: rotate(360deg);
+  @keyframes rotating {
+	from {
+	  -ms-transform: rotate(0deg);
+	  -moz-transform: rotate(0deg);
+	  -webkit-transform: rotate(0deg);
+	  -o-transform: rotate(0deg);
+	  transform: rotate(0deg);
+	}
+	to {
+	  -ms-transform: rotate(360deg);
+	  -moz-transform: rotate(360deg);
+	  -webkit-transform: rotate(360deg);
+	  -o-transform: rotate(360deg);
+	  transform: rotate(360deg);
+	}
   }
+
+.touch {
+	animation: rotating 20s infinite linear;
+}
+.tool {
+	position: relative;
+}
+
+.close {
+	position: absolute;
+	top: 1em;
+	right: 1em;
+}
+.close img {
+	width: 2em;
+
+}
+.invisible {
+	display: none;
 }
