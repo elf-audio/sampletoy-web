@@ -6,9 +6,9 @@ const RecButton = () => {
 	}
 	
 	return <div id="rec" onClick={recClicked}>
-		<div class="progress"></div>
+		<div className="progress"></div>
 		<h1>REC</h1>
-		<div class="overshadow"></div>
+		<div className="overshadow"></div>
 	</div>
 }
 

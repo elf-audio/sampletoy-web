@@ -1,5 +1,5 @@
 const WaveCropper = () => {
-    return <div id="wave"><div class="overshadow"></div></div>
+    return <div id="wave"><div className="overshadow"></div></div>
 }
 
 export default WaveCropper

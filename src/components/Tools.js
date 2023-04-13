@@ -23,13 +23,14 @@ const Tools = ({ children }) => {
 	<ul id="toolMenu">
 	{children.map((child, index) =>
 		<ToolItem name={child.props.name}
+		key={child.props.name}
 		isActive={activeTab === index}
 		onClick={() => setActiveTab(index)}
 		/>
 		)}
 		</ul>
 		{children.map((child, index) => (
-			<div class={"tool" + (activeTab === index?"":" invisible")}
+			<div className={"tool" + (activeTab === index?"":" invisible")}
 			key={child.props.name}>
 			<CloseButton clicked={closeTab}/>
 			{child}

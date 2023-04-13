@@ -244,6 +244,9 @@ h1 {
 }
 .tool {
 	position: relative;
+	overflow: hidden;
+	max-height: 1000px;
+	transition: max-height 0.5s ease-out;
 }
 
 .close {
@@ -256,5 +259,6 @@ h1 {
 
 }
 .invisible {
-	display: none;
+	max-height: 0;
+	transition: max-height 0.5s ease-out;
 }

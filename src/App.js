@@ -7,10 +7,10 @@ import Slider from './components/Slider.js'
 import RecButton from './components/RecButton.js'
 import WaveCropper from './components/WaveCropper.js'
 import TouchPad from './components/TouchPad.js'
+import ZoomButton from './components/ZoomButton.js'
 import {Tools, Tool} from './components/Tools.js'
 
 let mouseIsDown = false;
-
 
 function Title() {
 	return  <div id="title">
@@ -26,18 +26,16 @@ function Top() {
 }
 
 
-const Option = ({ children, isActive, onMouseDown, onMouseMove }) => {
-	return <li className={isActive?"selected":null} onMouseDown={onMouseDown} onMouseMove={onMouseMove}><label>{children}</label></li>;	
+const Option = ({ name, isActive, onMouseDown, onMouseMove }) => {
+	return <li className={isActive?"selected":null} onMouseDown={onMouseDown} onMouseMove={onMouseMove}><label>{name}</label></li>;	
 }
   
 const Segmented = ({ children }) => {
 	const [activeOption, setActiveOption] = useState(1);
-	function butto(ind) {
-		console.log("butto");
-	}
 	return <ul className="segmented">
 		{children.map((child, index) =>
 			cloneElement(child, {
+				key: child.props.name,
 				isActive: activeOption === index,
 				onMouseDown: () => setActiveOption(index),
 				onMouseMove: () => {
@@ -67,7 +65,7 @@ function App() {
 			<div id="rec-wave-zoom">
 				<RecButton />
 				<WaveCropper />
-				<div id="zoom">ZOOM<div class="overshadow"></div></div>
+				<ZoomButton />
 			</div>
 			<TouchPad />
 		</div>
@@ -84,11 +82,11 @@ function App() {
 					<Slider name="NOTE STEP" />
 
 					<Segmented>
-						<Option>CHROM</Option>
-						<Option>MAJ</Option>
-						<Option>MIN</Option>
-						<Option>PENTA</Option>
-						<Option>WHOLE</Option>
+						<Option name="CHROM" />
+						<Option name="MAJ" />
+						<Option name="MIN" />
+						<Option name="PENTA" />
+						<Option name="WHOLE" />
 					</Segmented>	
 				</Tool>
 				<Tool name="DELAY">
@@ -102,12 +100,12 @@ function App() {
 				</Tool>
 				<Tool name="MOD">
 					<Segmented>
-						<Option>NONE</Option>
-						<Option>LP</Option>
-						<Option>BP</Option>
-						<Option>HP</Option>
-						<Option>ATT.</Option>
-						<Option>REL.</Option>
+						<Option name="NONE" />
+						<Option name="LP" />
+						<Option name="BP" />
+						<Option name="HP" />
+						<Option name="ATT." />
+						<Option name="REL." />
 					</Segmented>	
 				</Tool>
 			</Tools>
