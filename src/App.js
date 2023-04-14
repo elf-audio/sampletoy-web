@@ -1,17 +1,19 @@
 import cog from './cog.svg'
+import React from 'react'
 
 import './App.css'
-import { cloneElement, useState } from 'react'
 import Toggle from './components/Toggle.js'
 import Slider from './components/Slider.js'
 import RecButton from './components/RecButton.js'
 import WaveCropper from './components/WaveCropper.js'
 import TouchPad from './components/TouchPad.js'
 import ZoomButton from './components/ZoomButton.js'
+
+import { Segmented, Option } from './components/Segmented.js'
+
 import {Tools, Tool} from './components/Tools.js'
-
-let mouseIsDown = false;
-
+import DevTools from './components/DevTools'
+import { setMouseIsDown } from './app/mouseUtil'
 function Title() {
 	return  <div id="title">
 		<h1>SAMPLETOY</h1>
@@ -21,40 +23,21 @@ function Title() {
 function Top() {
 	return <div id="top">
 		<Title />
-		<div id="cog"><img src={cog} /></div>
+		<div id="cog"><img src={cog} alt="settings" /></div>
 	</div>
 }
 
-
-const Option = ({ name, isActive, onMouseDown, onMouseMove }) => {
-	return <li className={isActive?"selected":null} onMouseDown={onMouseDown} onMouseMove={onMouseMove}><label>{name}</label></li>;	
-}
-  
-const Segmented = ({ children }) => {
-	const [activeOption, setActiveOption] = useState(1);
-	return <ul className="segmented">
-		{children.map((child, index) =>
-			cloneElement(child, {
-				key: child.props.name,
-				isActive: activeOption === index,
-				onMouseDown: () => setActiveOption(index),
-				onMouseMove: () => {
-					if(mouseIsDown) {
-						setActiveOption(index);
-					}
-				}
-			}),
-		)}
-	</ul>
-}
-
-
 function App() {
+
+	// const dispatch = useDispatch();
+
 	function globalMouseDown() {
-		mouseIsDown = true;
+		setMouseIsDown(true)
+		// dispatch(actionMap['mouseIsDown'](true))
 	}
 	function globalMouseUp() {
-		mouseIsDown = false;
+		setMouseIsDown(false)
+		// dispatch(actionMap['mouseIsDown'](false))
 	}
   return (
 
@@ -72,16 +55,16 @@ function App() {
 		<div>
 			<Tools>
 				<Tool name="PITCH">
-				<Slider name="PTICH" />
-				<Slider name="RANGE" />
-				<Toggle name="SMOOTH LOOP" />
+				<Slider name="PTICH" stateName="pitch" />
+				<Slider name="RANGE" stateName="range" />
+				<Toggle name="SMOOTH LOOP" stateName="smoothLoop" />
 				</Tool>
 				<Tool name="SCALE">
-					<Toggle name="STEPPED" />
-					<Toggle name="BASS MODE" />
-					<Slider name="NOTE STEP" />
+					<Toggle name="STEPPED" stateName="stepped" />
+					<Toggle name="BASS MODE" stateName="bassMode" />
+					<Slider name="NOTE STEP" stateName="noteStep" />
 
-					<Segmented>
+					<Segmented stateName="scale">
 						<Option name="CHROM" />
 						<Option name="MAJ" />
 						<Option name="MIN" />
@@ -99,7 +82,7 @@ function App() {
 					<Slider name="DECAY" />
 				</Tool>
 				<Tool name="MOD">
-					<Segmented>
+					<Segmented stateName="mod">
 						<Option name="NONE" />
 						<Option name="LP" />
 						<Option name="BP" />
@@ -111,7 +94,9 @@ function App() {
 			</Tools>
 			
 		</div>
+		<DevTools />
 	</div>
+	
   );
 }
 

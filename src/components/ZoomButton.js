@@ -1,4 +1,6 @@
 
+import React from 'react'
+
 const ZoomButton = () => {
     return <div id="zoom">ZOOM<div className="overshadow"></div></div>
 }

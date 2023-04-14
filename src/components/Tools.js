@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import close from '../close.svg'
 
 
@@ -11,7 +11,7 @@ const ToolItem = ({ name, isActive, onClick }) => {
 	</li>;
 }
 const CloseButton = ({clicked}) => {
-	return <div className="close" onClick={clicked}><img src={close} /></div>
+	return <div className="close" onClick={clicked}><img src={close} alt="close" /></div>
 }
 const Tools = ({ children }) => {
 	const [activeTab, setActiveTab] = useState(-1);

@@ -1,18 +1,23 @@
 
-import { useState } from 'react'
+import React from 'react'
 
-const Toggle = ({name}) => {
+import { useSelector, useDispatch } from 'react-redux';
+import { actionMap } from '../app/stateSlice';
 
-	const [active, setActive] = useState(false)
+const Toggle = ({name, stateName}) => {
 
-	const clicked = (e) => {
-		e.preventDefault()
-		setActive(!active)
-	}
+	const dispatch = useDispatch();
+	const stateValue = useSelector((state) => state.state[stateName]);
+
+	const handleToggle = () => {
+		if (actionMap[stateName]) {
+			dispatch(actionMap[stateName](!stateValue));
+		}
+	};
 
 	return <div 
-			className={active? "checkbox selected" : "checkbox"} 
-			onMouseDown={clicked}>
+			className={stateValue? "checkbox selected" : "checkbox"} 
+			onMouseDown={handleToggle}>
 				<label>{name}</label>
 	</div>;
 }
