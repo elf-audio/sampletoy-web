@@ -46,6 +46,9 @@ export const stateSlice = createSlice({
 		setRange: (state, action) => {
 			state.range = action.payload
 		},
+		setNoteStep: (state, action) => {
+			state.noteStep = action.payload
+		},
 		setDelayMix: (state, action) => {
 			state.delay.mix = action.payload
 		},
@@ -76,6 +79,7 @@ export const actionMap = {
 	mod: 			stateSlice.actions.setMod,
 	pitch: 			stateSlice.actions.setPitch,
 	range: 			stateSlice.actions.setRange,
+	noteStep: 		stateSlice.actions.setNoteStep,
 
 	delayMix: 		stateSlice.actions.setDelayMix,
 	delayDelay: 	stateSlice.actions.setDelayDelay,

@@ -79,7 +79,7 @@ function App() {
 				</Tool>
 				<Tool name="ENV">
 					<Slider name="ATTACK" stateName="envAttack" />
-					<Slider name="DECAY" stateName="envDecay" />
+					<Slider name="RELEASE" stateName="envRelease" />
 				</Tool>
 				<Tool name="MOD">
 					<Segmented stateName="mod">
