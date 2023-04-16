@@ -73,13 +73,13 @@ function App() {
 					</Segmented>	
 				</Tool>
 				<Tool name="DELAY">
-					<Slider name="MIX" />
-					<Slider name="DELAY" />
-					<Slider name="REPEAT" />
+					<Slider name="MIX" stateName="delayMix" />
+					<Slider name="DELAY" stateName="delayDelay" />
+					<Slider name="REPEAT" stateName="delayRepeat" />
 				</Tool>
 				<Tool name="ENV">
-					<Slider name="ATTACK" />
-					<Slider name="DECAY" />
+					<Slider name="ATTACK" stateName="envAttack" />
+					<Slider name="DECAY" stateName="envDecay" />
 				</Tool>
 				<Tool name="MOD">
 					<Segmented stateName="mod">

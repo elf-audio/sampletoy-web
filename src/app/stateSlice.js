@@ -26,30 +26,45 @@ export const stateSlice = createSlice({
 	reducers: {
 		
 		setStepped: (state, action) => {
-			state.stepped = action.payload;
+			state.stepped = action.payload
 		},
 		setBassMode: (state, action) => {
-			state.bassMode = action.payload;
+			state.bassMode = action.payload
 		},
 		setSmoothLoop: (state, action) => {
-			state.smoothLoop = action.payload;
+			state.smoothLoop = action.payload
 		},
 		setScale: (state, action) => {
-			state.scale = action.payload;
+			state.scale = action.payload
 		},
 		setMod: (state, action) => {
-			state.mod = action.payload;
+			state.mod = action.payload
+		},
+		setPitch: (state, action) => {
+			state.pitch = action.payload
+		},
+		setRange: (state, action) => {
+			state.range = action.payload
+		},
+		setDelayMix: (state, action) => {
+			state.delay.mix = action.payload
+		},
+		setDelayDelay: (state, action) => {
+			state.delay.delay = action.payload
+		},
+		setDelayRepeat: (state, action) => {
+			state.delay.repeat = action.payload
+		},
+		setEnvAttack: (state, action) => {
+			state.env.attack = action.payload
+		},
+		setEnvRelease: (state, action) => {
+			state.env.release = action.payload
 		},
 		
 	},
 })
 
-// // Action creators are generated for each case reducer function
-// export const { 
-// 	setStepped, 
-// 	setBassMode, 
-// 	setSmoothLoop 
-// } = stateSlice.actions;
 
 export default stateSlice.reducer
 
@@ -59,5 +74,13 @@ export const actionMap = {
 	smoothLoop: 	stateSlice.actions.setSmoothLoop,
 	scale: 			stateSlice.actions.setScale,
 	mod: 			stateSlice.actions.setMod,
+	pitch: 			stateSlice.actions.setPitch,
+	range: 			stateSlice.actions.setRange,
+
+	delayMix: 		stateSlice.actions.setDelayMix,
+	delayDelay: 	stateSlice.actions.setDelayDelay,
+	delayRepeat: 	stateSlice.actions.setDelayRepeat,
+	envAttack: 		stateSlice.actions.setEnvAttack,
+	envRelease: 	stateSlice.actions.setEnvRelease,
 };
 
