@@ -11,6 +11,9 @@
 #include "MarekFilter.h"
 #include "Recorder.h"
 
+#include "Playhead.h"
+#include <map>
+
 #define LENGTH 441000
 
 #define CHROMATIC   0
@@ -29,7 +32,8 @@
 
 class Settings {
 public:
-	
+
+	float 	recTime 	= 0.f;
 	bool 	recording 	= false;
 	float 	noteStep 	= 0.33;
 	bool 	smoothLoop 	= false;
@@ -56,6 +60,10 @@ public:
 	float 	*audio;
 	float 	*preview;
 	int 	*length;
+
+	void setCursors(float *_cursors, int size) {
+		
+	}
 };
 
 
@@ -63,6 +71,9 @@ class Global {
 public:
 	std::mutex audioMutex;
 	Settings settings;
+
+	// TODO: should be a flatmap, and not have pointers
+	std::map<int,Playhead*> playheads;
 
 	InterpolatingDelay *delayL;
 	InterpolatingDelay *delayR;

@@ -64,7 +64,7 @@ void SampletoyApp::audioIn( float * output, int bufferSize, int nChannels ) {
 
 		G.audioMutex.lock();
 		
-		for (auto it=ui.pad.playheads.begin(); it != ui.pad.playheads.end(); it++) {
+		for (auto it = G.playheads.begin(); it != G.playheads.end(); it++) {
 			Playhead *p = (*it).second;
 			if(p==NULL) continue;
 			for(int i = 0; i < bufferSize; i++) {
@@ -134,7 +134,7 @@ void SampletoyApp::audioIn( float * output, int bufferSize, int nChannels ) {
 			output[i*2] = delayL.process(output[i*2]);
 			output[i*2+1] = delayR.process(output[i*2+1]);
 		}
-		ui.cropButton.setCursors(cursors, cursorCount);
+		G.settings.setCursors(cursors, cursorCount);
 		
 	} else {
 		
@@ -150,7 +150,6 @@ void SampletoyApp::audioIn( float * output, int bufferSize, int nChannels ) {
 }
 
 void SampletoyApp::startRecording() {
-	ui.cropButton.reset();
 	G.settings.zoom = false;
 	G.settings.startCrop = 0;
 	G.settings.endCrop = 1;
@@ -183,6 +182,6 @@ void SampletoyApp::audioOut(float *output, int bufferSize, int nChannels) {
 		}
 		length += rlength;
 	}
-	ui.recButton.time = (float) length / LENGTH;
+	G.settings.recTime = (float) length / LENGTH;
 	lastTimeRecording = G.settings.recording;
 }
