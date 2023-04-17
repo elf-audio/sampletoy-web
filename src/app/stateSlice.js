@@ -18,6 +18,7 @@ const initialState = {
 		release: 0.0,
 	},
 	mod: 0,
+	zoom: false,
 };
   
 export const stateSlice = createSlice({
@@ -64,6 +65,10 @@ export const stateSlice = createSlice({
 		setEnvRelease: (state, action) => {
 			state.env.release = action.payload
 		},
+
+		setZoom: (state, action) => {
+			state.zoom = action.payload
+		},
 		
 	},
 })
@@ -86,5 +91,7 @@ export const actionMap = {
 	delayRepeat: 	stateSlice.actions.setDelayRepeat,
 	envAttack: 		stateSlice.actions.setEnvAttack,
 	envRelease: 	stateSlice.actions.setEnvRelease,
+
+	zoom:			stateSlice.actions.setZoom,
 };
 
