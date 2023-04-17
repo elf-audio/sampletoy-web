@@ -8,12 +8,12 @@ import RecButton from './components/RecButton.js'
 import WaveCropper from './components/WaveCropper.js'
 import TouchPad from './components/TouchPad.js'
 import ZoomButton from './components/ZoomButton.js'
-
 import { Segmented, Option } from './components/Segmented.js'
 
 import {Tools, Tool} from './components/Tools.js'
 import DevTools from './components/DevTools'
 import { setMouseIsDown } from './app/mouseUtil'
+import FullSizeCanvas from './components/FullSizeCanvas'
 function Title() {
 	return  <div id="title">
 		<h1>SAMPLETOY</h1>
