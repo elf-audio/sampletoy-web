@@ -2,8 +2,10 @@
 
 echo "sampletoy emscripten builder"
 
+mkdir -p build
 
-# mkdir -p build
+#### THIS BLOCK JUST BUILDS THE SOURCES CPP FASHION
+# 
 # rm -Rf build/*.o
 # g++ -c -std=c++20 -O3 src/MarekFilter.cpp 		-o build/MarekFilter.o
 # g++ -c -std=c++20 -O3 src/Recorder.cpp 			-o build/Recorder.o
@@ -11,7 +13,9 @@ echo "sampletoy emscripten builder"
 # g++ -c -std=c++20 -O3 src/SampletoyAppAudio.cpp -o build/SampletoyAppAudio.o
 
 
-mkdir -p build
+#### THIS BUILDS IT IN EMSCRIPTEN
+#### - should probably have a switch so cmake can do all the building
+
 pushd build
 	emcmake cmake ..
 	make

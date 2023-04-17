@@ -185,3 +185,7 @@ void SampletoyApp::audioOut(float *output, int bufferSize, int nChannels) {
 	G.settings.recTime = (float) length / LENGTH;
 	lastTimeRecording = G.settings.recording;
 }
+
+int main() {
+	printf("hello world\n");
+}
