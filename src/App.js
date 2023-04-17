@@ -27,6 +27,17 @@ function Top() {
 	</div>
 }
 
+
+
+// Import the DevTools only if the NODE_ENV is not production.
+let MyDevTools = () => {return <div /> }
+if (process.env.NODE_ENV !== 'production') {
+// //   const { default: DefaultDevTools } = require('@devtools-detect');
+  MyDevTools = () => {return <DevTools />}
+}
+
+
+
 function App() {
 
 	// const dispatch = useDispatch();
@@ -94,7 +105,7 @@ function App() {
 			</Tools>
 			
 		</div>
-		<DevTools />
+		<MyDevTools />
 	</div>
 	
   );
