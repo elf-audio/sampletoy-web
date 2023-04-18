@@ -5,6 +5,7 @@ import React, { useState, useRef, useEffect } from 'react'
 
 
 import FullSizeSVG from './FullSizeSVG'; // Import the FullSizeSVG component
+import SpinningStar from './SpinningStar';
 
 const TouchPad = (props) => {
 	const createSVGContent = (width, height) => {
@@ -54,6 +55,7 @@ const TouchPad = (props) => {
 	
 	return <div id="chop" className="inner-shadow">
 	<FullSizeSVG createSVGContent={createSVGContent} {...props} />
+	<SpinningStar />
 	</div>
 };
 

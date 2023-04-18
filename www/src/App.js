@@ -53,7 +53,7 @@ function App() {
   return (
 <>
     <div id="main" onMouseDown={globalMouseDown} onMouseUp={globalMouseUp}>
-       {/* <Top />
+    <Top />
 
 	 	<div id="rec-wave-chop">
 	 		<div id="rec-wave-zoom">
@@ -104,9 +104,9 @@ function App() {
 	 			</Tool>
 	 		</Tools>
 		
-	 	</div> */}
+	 	</div> 
 		<MyDevTools />
-	<SpinningStar />
+
 	</div>
 	<Welcome />
 	</>

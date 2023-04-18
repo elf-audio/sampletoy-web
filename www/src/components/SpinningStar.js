@@ -1,7 +1,27 @@
 // SpinningStar.js
 import React, { useState, useRef } from 'react';
-import { css } from '@emotion/react';
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react'
 
+
+
+
+const starStyle = css`
+	
+	position: absolute;
+	width: 128px;
+	height: 112px;
+	animation: rotating 1s linear infinite;
+`
+
+const starComponentStyle = css`
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	top: 0;
+	left: 0;
+	position: absolute;
+`
 
 
 
@@ -83,23 +103,22 @@ const starSvg = (
 		
 		
 		return (
-			<div className="starGPTRoot">
+
 			<div
 			ref={padRef}
-			className="starGPTComponent"
+			css={starComponentStyle}
 			onTouchMove={onTouchMove}
 			onMouseDown={onMouseDown}
 			onMouseMove={onMouseMove}
 			onMouseUp={onMouseUp}
-			onMouseLeave={onMouseUp}
-			>
+			onMouseLeave={onMouseUp}>
 			{stars.map((star) => (
-				<div key={star.id} className="starGPT" style={{ left: star.x, top: star.y }}>
+				<div key={star.id} css={starStyle} style={{ left: star.x, top: star.y }}>
 				{starSvg}
 				</div>
 				))}
 				</div>
-				</div>
+
 				);
 			};
 			
