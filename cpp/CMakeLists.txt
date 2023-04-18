@@ -8,7 +8,7 @@ add_definitions(-std=c++17 -O3)
 include_directories(src)
 file(GLOB SOURCES src/*.cpp)
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+# set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 
 add_executable(sampletoy_web ${SOURCES})
@@ -22,18 +22,20 @@ target_compile_options(sampletoy_web PRIVATE
   # Add more flags here
 )
 
+set(CMAKE_VERBOSE_MAKEFILE on)
+
 # Set custom emcc flags for linking
 target_link_options(sampletoy_web PRIVATE
-"-s SINGLE_FILE=1"  
-"-s WASM=1"
-  "-O3"
-  "-s ALLOW_MEMORY_GROWTH=1" 
-#   -s EXPORTED_FUNCTIONS='["_your_exported_function"]'
-  "-s EXPORTED_FUNCTIONS=\"['_malloc', '_free', '_main']\""
-  "-s MODULARIZE=1"
-  
-  "-s WASM_ASYNC_COMPILATION=0"
-  "--bind"
+	-sSINGLE_FILE=1
+	-sWASM=1
+	-O3
+	-sALLOW_MEMORY_GROWTH=1
+	# watch out, no spaces must be in the array below between the items
+	-sEXPORTED_FUNCTIONS=['_malloc','_free','_main']
+	-sMODULARIZE=1
+	-sWASM_ASYNC_COMPILATION=0
+	--bind
+	#   -o build/main.js
 )
 
 

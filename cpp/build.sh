@@ -16,12 +16,23 @@ mkdir -p build
 #### THIS BUILDS IT IN EMSCRIPTEN
 #### - should probably have a switch so cmake can do all the building
 
+# Define the check_error function
+check_error() {
+    if [ $1 -ne 0 ]; then
+        echo "failure in build.sh"
+        exit $1
+    fi
+}
+
 pushd build
 	emcmake cmake ..
+	check_error $?
 	make
-	BUILD_RET_CODE=$?
+	check_error $?
+	cat sampletoy_web.wasm.js ../res/worklet-base.js > ../../www/public/audioWorklet.js
+	check_error $?
 popd
-exit $BUILD_RET_CODE
+
 
 
 
