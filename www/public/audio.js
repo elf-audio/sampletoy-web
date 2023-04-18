@@ -23,7 +23,7 @@ let noiseGenerator = null;
 
 const demoCode = async (context) => {
 	window.startedLoading();
-	await context.audioWorklet.addModule('../audioWorklet.js');//workletUrl);
+	await context.audioWorklet.addModule('./audioWorklet.js');//workletUrl);
 
 	noiseGenerator = new AudioWorkletNode(context, 'worklet', {numberOfInputs: 1, numberOfOutputs: 1, outputChannelCount: [2]});
 

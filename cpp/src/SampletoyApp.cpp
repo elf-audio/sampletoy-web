@@ -130,3 +130,9 @@ float SampletoyApp::getSample() {
 
 	return sin(phase) * 0.5f;
 }
+
+void SampletoyApp::getSamples(float *samples, int length) {
+	for(int i = 0; i < length; i++) {
+		samples[i] = getSample();
+	}
+}

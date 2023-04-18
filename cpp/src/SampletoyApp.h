@@ -35,6 +35,8 @@ SampletoyApp(double sampleRate);
 	void audioOut( float * output, int bufferSize, int nChannels );
 
 	float getSample();
+	void getSamples(float *samples, int length);
+	
 	void startRecording();
 	void stopRecording();
 
