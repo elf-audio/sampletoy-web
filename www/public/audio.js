@@ -17,7 +17,7 @@ function detectAudioWorklet() {
 }
 
 
-let noiseGenerator = null;
+let sampletoyNode = null;
 
 // import workletUrl from 'worklet:./audioWorklet.js';
 
@@ -28,10 +28,16 @@ const loadAudioWorklet = async (context) => {
 	await context.audioWorklet.addModule('./audioWorklet.js');//workletUrl);
 	// await context.audioWorklet.addModule(workletUrl);
 	// console.log("after await");
-	noiseGenerator = new AudioWorkletNode(context, 'worklet', {numberOfInputs: 1, numberOfOutputs: 1, outputChannelCount: [2]});
+	const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+	const source = context.createMediaStreamSource(stream);
 
-	noiseGenerator.connect(context.destination);
-	noiseGenerator.port.onmessage = (e) => window.messageReceived(e.data);
+	sampletoyNode = new AudioWorkletNode(context, 'worklet', {numberOfInputs: 1, numberOfOutputs: 1, outputChannelCount: [2]});
+	source.connect(sampletoyNode);
+	sampletoyNode.connect(context.destination);
+
+
+
+	sampletoyNode.port.onmessage = (e) => window.messageReceived(e.data);
 	for(let i = 0; i < unsentMsgs.length; i++) {
 		sendMsg(unsentMsgs[i]);
 	}
@@ -65,10 +71,10 @@ function startAudio() {
 
 
 function sendMsg(s) {
-	if(noiseGenerator!=null) {
+	if(sampletoyNode!=null) {
 		console.log(s);
 
-		noiseGenerator.port.postMessage(s);
+		sampletoyNode.port.postMessage(s);
 	} else {
 		unsentMsgs.push(s);
 	}
