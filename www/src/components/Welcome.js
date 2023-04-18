@@ -1,12 +1,15 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
+import React, { useState } from 'react'
 
 const containerStyle = css`
 	z-index:2;
 	position: absolute;
 	display: flex;
 	justify-content: center;
-	 
+	background-color: rgb(0,0,0,0.5);
+	-webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
 	align-items: center;
 	width: 100vw;
 	height: 100vh;
@@ -14,7 +17,7 @@ const containerStyle = css`
 const innerStyle = css`
 	z-index:2;
 	position: absolute;
-	background-color: green;
+	background-color: #444;
 	padding: 2em;
 	border-radius: 0.25em;
 	text-align: center;
@@ -40,18 +43,21 @@ const buttonStyle = css`
 
   `
 const Welcome = () => {
+
+	const [isVisible, setIsVisible] = useState(true)
 	const handleClick = () => {
-		// if (typeof window.startAudioFn === "function") {
+		if (typeof window.startAudioFn === "function") {
+			setIsVisible(false);
 			window.startAudioFn()
-		//   } else {
-			// console.error("Couldn't find window.startAudioFn")
-		//   }
+		  } else {
+			console.error("Couldn't find window.startAudioFn")
+		  }
 	}
-	return <div css={containerStyle}>
+	return isVisible && (<div css={containerStyle}>
 		<div css={innerStyle}>
-		<h1>WELCOME</h1>
+		<h1>SAMPLETOY</h1>
 		<input type="button" css={buttonStyle} onClick={handleClick} value="start" />
 		</div>
-		</div>
+		</div>)
 }
 export default Welcome
