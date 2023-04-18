@@ -132,7 +132,9 @@ float SampletoyApp::getSample() {
 }
 
 void SampletoyApp::getSamples(float *samples, int length) {
+	// format is non-interleaved, LLLLLLLRRRRRRR
 	for(int i = 0; i < length; i++) {
-		samples[i] = getSample();
+		samples[i] =samples[i+length] = getSample();
+
 	}
 }

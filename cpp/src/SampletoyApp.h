@@ -40,6 +40,12 @@ SampletoyApp(double sampleRate);
 		float* ptr = reinterpret_cast<float*>(input);
 		getSamples(ptr, length);
 	}
+	void getSamplesF(const float (&input)[8192], int length) {
+		getSamples((float*)input, length);
+	}
+	void getSamplesV(std::vector<float> &v, int length) {
+		getSamples(v.data(), length);
+	}
 	void startRecording();
 	void stopRecording();
 

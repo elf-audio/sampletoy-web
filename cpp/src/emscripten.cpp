@@ -3,19 +3,13 @@
 #include <emscripten/bind.h>
 #include <emscripten.h>
 
-EMSCRIPTEN_BINDINGS(MyLiveAudio) {
-	emscripten::class_<SampletoyApp>("SampletoyApp")
-		.constructor<double>()
-		// .function("getVector", &MyLiveAudio::getVector)
-		// .function("sendCommand", &MyLiveAudio::sendCommand)
-		.function("getSample", &SampletoyApp::getSample)
-		.function("getSamples", &SampletoyApp::getSamplesI, emscripten::allow_raw_pointers())
 
-		// .function("getR", &MyLiveAudio::getR)
-		;
-// void audioOut(float *samples, int length, int numChans) override
-
-	emscripten::register_vector<float>("vector<float>");
+SampletoyApp app(48000);
+extern "C" {
+	int getSamples(float *data, int length) {
+		app.getSamples(data, length);
+		return 0;
+	}
 }
 
 void sendMessage(std::string msg) {

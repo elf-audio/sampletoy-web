@@ -18,7 +18,7 @@ add_executable(sampletoy_web ${SOURCES})
 target_compile_options(sampletoy_web PRIVATE
   -sWASM=1  ########################## SET TO 1 for actual WASM!
   -std=c++17
-  -O3
+  -O1
   # Add more flags here
 )
 
@@ -29,10 +29,11 @@ target_link_options(sampletoy_web PRIVATE
 	-sSINGLE_FILE=1
 	-sWASM=1 
 	# -sMALLOC=emmalloc
-	-O3
+	-O1
 	-sALLOW_MEMORY_GROWTH=1
 	# watch out, no spaces must be in the array below between the items
-	-sEXPORTED_FUNCTIONS=['_malloc','_free','_main']
+	-sEXPORTED_FUNCTIONS=['_malloc','_free','_main','_getSamples']
+	-sEXPORTED_RUNTIME_METHODS=['ccall','cwrap']
 	-sMODULARIZE=1
 	-sWASM_ASYNC_COMPILATION=0
 	--bind
