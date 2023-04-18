@@ -19,7 +19,7 @@ public:
 SampletoyApp(double sampleRate);
 	void setup();
 
-	
+
 	void update();
 
 	bool lastTimeRecording = false;
@@ -36,7 +36,10 @@ SampletoyApp(double sampleRate);
 
 	float getSample();
 	void getSamples(float *samples, int length);
-	
+	void getSamplesI(uintptr_t input, int length) {
+		float* ptr = reinterpret_cast<float*>(input);
+		getSamples(ptr, length);
+	}
 	void startRecording();
 	void stopRecording();
 

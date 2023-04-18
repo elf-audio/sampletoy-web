@@ -9,7 +9,7 @@ EMSCRIPTEN_BINDINGS(MyLiveAudio) {
 		// .function("getVector", &MyLiveAudio::getVector)
 		// .function("sendCommand", &MyLiveAudio::sendCommand)
 		.function("getSample", &SampletoyApp::getSample)
-		.function("getSamples", &SampletoyApp::getSamples, emscripten::allow_raw_pointers())
+		.function("getSamples", &SampletoyApp::getSamplesI, emscripten::allow_raw_pointers())
 
 		// .function("getR", &MyLiveAudio::getR)
 		;

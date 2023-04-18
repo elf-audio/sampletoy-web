@@ -21,10 +21,13 @@ let noiseGenerator = null;
 
 // import workletUrl from 'worklet:./audioWorklet.js';
 
-const demoCode = async (context) => {
+const loadAudioWorklet = async (context) => {
 	window.startedLoading();
-	await context.audioWorklet.addModule('./audioWorklet.js');//workletUrl);
+	console.log("loading AudioWorklet");
 
+	await context.audioWorklet.addModule('./audioWorklet.js');//workletUrl);
+	// await context.audioWorklet.addModule(workletUrl);
+	// console.log("after await");
 	noiseGenerator = new AudioWorkletNode(context, 'worklet', {numberOfInputs: 1, numberOfOutputs: 1, outputChannelCount: [2]});
 
 	noiseGenerator.connect(context.destination);
@@ -43,17 +46,16 @@ let audioContext = null;
 
 let unsentMsgs = [];
 
-
-
 function startAudio() {
 
 	if(!running) {
 		if(audioContext==null) {
 			audioContext = new AudioContextConstructor();
-			demoCode(audioContext);  
+			loadAudioWorklet(audioContext);  
 		}
 
 		audioContext.resume();
+		console.log("audiocontext running")
 		running = true;
 	} else {
 		audioContext.suspend();
@@ -73,3 +75,6 @@ function sendMsg(s) {
 }
 window.startAudioFn = startAudio;
 window.sendMsg = sendMsg;
+window.messageReceived = (s) => {
+	console.log(s)
+}
