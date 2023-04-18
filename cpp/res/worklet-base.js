@@ -1,23 +1,12 @@
 
 
 
-
-
-
-
-
-
-
-
-
 let v = null;
 
 function receiveMessage(s){
   // console.log(s);
   if(v!=null) v.receiveMessage(s);
 }
-
-
 
 
 class Worklet extends AudioWorkletProcessor {
