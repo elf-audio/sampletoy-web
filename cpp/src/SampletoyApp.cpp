@@ -6,18 +6,21 @@
 
 Global G;
 
-//--------------------------------------------------------------
-void SampletoyApp::setup() {
-	
+
+SampletoyApp::SampletoyApp(double sampleRate) {
+
 	G.init();
 
-	setupAudio();
+	recorder = &G.recorder;
+	G.filter = &filter;
+	G.delayL = &delayL;
+	G.delayR = &delayR;
 	
 	G.settings.audio = audio;
 	G.settings.preview = preview;
 	G.settings.length = &length;
-
 }
+
 
 
 //--------------------------------------------------------------
@@ -119,3 +122,11 @@ void SampletoyApp::update() {
 	
 // 	return true;
 // }
+
+
+double phase = 0;
+float SampletoyApp::getSample() {
+	phase += 2.0 * 3.141 * 256.0 / 48000.f;
+
+	return sin(phase) * 0.5f;
+}

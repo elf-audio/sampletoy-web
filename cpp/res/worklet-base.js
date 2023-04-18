@@ -24,11 +24,11 @@ class Worklet extends AudioWorkletProcessor {
 
 	constructor() {
 		super();
-
+		console.log("STARTING");
 		this.kernel = Module();
    
-   		// console.log("STARTING");
-		this.my = new this.kernel.MyLiveAudio(sampleRate);
+   		
+		this.my = new this.kernel.SampletoyApp(sampleRate);
 
 		this.port.onmessage = (event) => {
 			// Handling data from the node.
@@ -41,23 +41,18 @@ class Worklet extends AudioWorkletProcessor {
 		this.port.postMessage(s);
 		// console.log("WORKLET", s);
 	}
-
 	
 	process(inputs, outputs, parameters) {
 
 		const output = outputs[0];	
-
-
 
 		const length = output[0].length;
 		for (let i = 0; i < length; ++i) {
 
 			// output[1][i] =
 			output[0][i] = this.my.getSample();
-			output[1][i] = this.my.getR();
+			output[1][i] = output[1][i];
 		}
-
-
 
 
 

@@ -9,12 +9,7 @@
 
 #include "SampletoyApp.h"
 
-void SampletoyApp::setupAudio() {
-	recorder = &G.recorder;
-	G.filter = &filter;
-	G.delayL = &delayL;
-	G.delayR = &delayR;
-}
+
 
 //
 // SAMPLETOY IS MONO!

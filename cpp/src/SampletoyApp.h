@@ -16,8 +16,9 @@
 class SampletoyApp  {
 	
 public:
+SampletoyApp(double sampleRate);
 	void setup();
-	void setupAudio();
+
 	
 	void update();
 
@@ -33,6 +34,7 @@ public:
 	void audioIn( float * output, int bufferSize, int nChannels );
 	void audioOut( float * output, int bufferSize, int nChannels );
 
+	float getSample();
 	void startRecording();
 	void stopRecording();
 
